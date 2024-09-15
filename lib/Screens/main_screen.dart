@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:party_box/games/spy_game/spy.dart';
+import 'package:party_box/games/wink_game/wink.dart';
 import 'package:party_box/resources/lists.dart';
 
 import 'setting_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
+
+  // This method returns the appropriate screen based on the index
+  Widget _getGameScreen(int index) {
+    switch (index) {
+      case 0:
+        return Spy(); // Navigates to Spy game
+      case 1:
+        return Wink(); // Navigates to Wink game
+      default:
+        return Spy(); // Default to Spy game if index is out of bounds
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +49,31 @@ class MainScreen extends StatelessWidget {
                 mainAxisSpacing: 10,
               ),
               padding: const EdgeInsets.all(10),
-              itemCount: gamesList.length, // Replace with the number of games
+              itemCount: gamesList.length, // Number of games
               itemBuilder: (context, index) {
                 return Card(
                   color: Colors.purple,
-                  // ,
-                  child: FloatingActionButton(
-                      onPressed: () {},
-                      child: Center(child: Text(gamesList[index]))),
+                  child: InkWell(
+                    onTap: () {
+                      // Navigate to the selected game screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => _getGameScreen(index),
+                        ),
+                      );
+                    },
+                    child: Center(
+                      child: Text(
+                        gamesList[index],
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                 );
               },
             ),
@@ -55,7 +86,6 @@ class MainScreen extends StatelessWidget {
                 // Implement surprise me functionality
               },
               style: ElevatedButton.styleFrom(
-                // primary: Colors.pinkAccent,
                 padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
                 textStyle: const TextStyle(fontSize: 18),
