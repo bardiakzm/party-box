@@ -37,8 +37,9 @@ class MainScreen extends StatelessWidget {
               itemCount: 10, // Replace with the number of games
               itemBuilder: (context, index) {
                 return Card(
-                  color: Colors.pinkAccent,
-                  child: Center(child: Text('Game $index')),
+                  color: Colors.purple,
+                  // child: Center(child: Text('Game $index')),
+                  child: FloatingActionButton(onPressed: () {}),
                 );
               },
             ),
@@ -52,7 +53,8 @@ class MainScreen extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 // primary: Colors.pinkAccent,
-                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
                 textStyle: const TextStyle(fontSize: 18),
               ),
               child: const Text('Surprise Me!'),
