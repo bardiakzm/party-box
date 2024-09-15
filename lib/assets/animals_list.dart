@@ -1,4 +1,4 @@
-List<Map<String, String>> persianAnimals = [
+List<Map<String, String>> animals = [
   // Land Animals
   {'english': 'Cat', 'persian': 'گربه'},
   {'english': 'Dog', 'persian': 'سگ'},
