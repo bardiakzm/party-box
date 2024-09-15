@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:party_box/resources/lists.dart';
 
 import 'setting_screen.dart';
 
@@ -34,12 +35,14 @@ class MainScreen extends StatelessWidget {
                 mainAxisSpacing: 10,
               ),
               padding: const EdgeInsets.all(10),
-              itemCount: 10, // Replace with the number of games
+              itemCount: gamesList.length, // Replace with the number of games
               itemBuilder: (context, index) {
                 return Card(
                   color: Colors.purple,
-                  // child: Center(child: Text('Game $index')),
-                  child: FloatingActionButton(onPressed: () {}),
+                  // ,
+                  child: FloatingActionButton(
+                      onPressed: () {},
+                      child: Center(child: Text(gamesList[index]))),
                 );
               },
             ),
