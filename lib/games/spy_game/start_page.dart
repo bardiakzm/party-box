@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:party_box/assets/timer_page.dart';
 
+import 'intermediate_page.dart';
 import 'player_page.dart';
 
 class StartPage extends StatefulWidget {
@@ -24,28 +25,38 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   int _currentPlayer = -1;
   bool _gameStarted = false;
+  bool _showIntermediatePage = false; // New state for intermediate page
 
   void _startGame() {
     setState(() {
       _gameStarted = true;
       _currentPlayer = 0;
+      _showIntermediatePage = true; // Show the intermediate page first
     });
   }
 
   void _nextPlayer() {
-    if (_currentPlayer < widget.numPlayers - 1) {
+    if (_showIntermediatePage) {
       setState(() {
-        _currentPlayer++;
+        _showIntermediatePage =
+            false; // After the intermediate page, show the player page
       });
     } else {
-      // All players have seen their roles, end the game or move to the next phase
-      // Navigator.of(context).pop(); // Or navigate to a game screen
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                CircularTimer(duration: widget.gameDuration * 60)),
-      );
+      if (_currentPlayer < widget.numPlayers - 1) {
+        setState(() {
+          _currentPlayer++;
+          _showIntermediatePage =
+              true; // Show the intermediate page for the next player
+        });
+      } else {
+        // All players have seen their roles, end the game or move to the next phase
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  CircularTimer(duration: widget.gameDuration * 60)),
+        );
+      }
     }
   }
 
@@ -85,7 +96,15 @@ class _StartPageState extends State<StartPage> {
           ),
         ),
       );
+    } else if (_showIntermediatePage) {
+      // Show the intermediate page before showing the player's role
+      return IntermediatePage(
+        onNext: _nextPlayer,
+        playerNumber: _currentPlayer + 1,
+        totalPlayers: widget.numPlayers,
+      );
     } else {
+      // Show the player's role page
       return PlayerPage(
         text: _getCurrentPlayerRole(),
         onNext: _nextPlayer,
