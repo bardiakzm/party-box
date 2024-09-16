@@ -75,11 +75,11 @@ class _CircularTimerState extends State<CircularTimer>
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Colors.grey[900]!, Colors.grey[900]!],
+          colors: [Color(0xFF2D003D), Color(0xFF000000)],
         ),
       ),
       child: Column(
@@ -174,7 +174,7 @@ class _CircularTimerState extends State<CircularTimer>
                 "Exit",
                 style: TextStyle(
                   fontSize: 18,
-                  color: Colors.grey[500]!,
+                  color: Colors.grey[400]!,
                 ),
               ),
             ),
