@@ -58,11 +58,14 @@ class _CircularTimerState extends State<CircularTimer>
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
                 // Navigator.pop(context); // Close the CircularTimer page
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Spy(languageChosen: true),
-                    ));
+
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Spy(languageChosen: true),
+                  ),
+                  (Route<dynamic> route) => false,
+                );
               },
               child: const Text('Yes'),
             ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:party_box/Screens/splash_screen.dart';
 
 import 'Screens/main_screen.dart';
 import 'games/spy_game/spy.dart';
@@ -18,7 +17,8 @@ class PartyBoxApp extends StatelessWidget {
         primarySwatch: Colors.pink,
         brightness: Brightness.dark,
       ),
-      home: const SplashScreen(),
+      // home: const SplashScreen(),
+      initialRoute: '/main',
       routes: {
         '/main': (context) => const MainScreen(), // Root route
         '/spy': (context) => Spy(), // Route for Spy Game

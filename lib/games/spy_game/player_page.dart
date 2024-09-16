@@ -18,22 +18,35 @@ class PlayerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Player $playerNumber of $totalPlayers'),
-            const SizedBox(height: 20),
-            Text(
-              text,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 50),
-            ElevatedButton(
-              onPressed: onNext,
-              child:
-                  Text(playerNumber < totalPlayers ? 'Next Player' : 'Finish'),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(top: 120),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Player $playerNumber of $totalPlayers'),
+              const SizedBox(height: 20),
+              Text(
+                text,
+                style:
+                    const TextStyle(fontSize: 30, fontWeight: FontWeight.w400),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 220),
+                child: SizedBox(
+                  height: 100,
+                  width: 200,
+                  child: ElevatedButton(
+                    onPressed: onNext,
+                    child: Text(
+                      playerNumber < totalPlayers ? 'Next Player' : 'Finish',
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w300),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
