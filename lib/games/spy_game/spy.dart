@@ -1,5 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:party_box/utils/language_selector_screen.dart'; // Import the Choose Language Screen
+import 'package:party_box/games/spy_game/start_page.dart';
+import 'package:party_box/utils/language_selector_screen.dart';
+
+import '../../assets/animals_list.dart';
+import '../../assets/countries_list.dart';
+import '../../assets/places_list.dart'; // Import the Choose Language Screen
 
 class Spy extends StatefulWidget {
   final String label = 'Spy';
@@ -15,9 +22,14 @@ class _SpyState extends State<Spy> {
   int _gameDuration = 10; // Default game duration
   int _numPlayers = 4; // Default number of players
   int _numSpies = 1; // Default number of spies
-  String _selectedCategory = 'All'; // Default category
+  String _selectedCategory = 'Animals'; // Default category
+  String? _chosenWord; // Variable to hold the chosen word
 
-  final List<String> _categories = ['Cities', 'Animals', 'All'];
+  final List<String> _categories = [
+    'Cities',
+    'Animals',
+    'Countries'
+  ]; // Categories for the game
 
   @override
   void didChangeDependencies() {
@@ -36,19 +48,54 @@ class _SpyState extends State<Spy> {
     );
 
     setState(() {
-      _selectedLanguage = selectedLanguage ?? 'English';
+      _selectedLanguage = selectedLanguage ??
+          'english'; // Default to English if no language chosen
       _languageChosen = true;
     });
   }
 
+  List<Map<String, String>> _getListByCategory() {
+    if (_selectedCategory == 'Animals') {
+      return animalsList; // From animals_list.dart
+    } else if (_selectedCategory == 'Places') {
+      return placesList; // From places_list.dart
+    } else {
+      return countriesList; // From countries_list.dart
+    }
+  }
+
   // Method to start the game
   void _startGame() {
+    List<Map<String, String>> categoryList = _getListByCategory();
+    if (categoryList.isNotEmpty) {
+      Random random = Random();
+      int randomIndex = random.nextInt(categoryList.length);
+
+      // Check if the selected language exists in the map
+      if (categoryList[randomIndex].containsKey(_selectedLanguage)) {
+        _chosenWord = categoryList[randomIndex][_selectedLanguage];
+        print('Chosen word: $_chosenWord');
+      } else {
+        print('Language not found in the list.');
+        _chosenWord = null; // Handle case where language key doesn't exist
+      }
+    }
     print('Starting game with:');
+    print('Language: $_selectedLanguage');
     print('Time: $_gameDuration minutes');
     print('Players: $_numPlayers');
     print('Spies: $_numSpies');
     print('Category: $_selectedCategory');
-    // Here, you can navigate to the actual game logic screen
+    // Add game logic or navigation to the game screen here
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => StartPage(
+              numPlayers: _numPlayers,
+              numSpies: _numSpies,
+              gameDuration: _gameDuration,
+              selectedWord: _chosenWord)),
+    );
   }
 
   @override
@@ -71,6 +118,14 @@ class _SpyState extends State<Spy> {
                       style: TextStyle(fontSize: 24, color: Colors.white),
                     ),
                     const SizedBox(height: 20),
+
+                    // Language Display
+                    Text(
+                      'Selected Language: $_selectedLanguage',
+                      style: const TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                    const SizedBox(height: 20),
+
                     // Time Selection
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,6 +152,7 @@ class _SpyState extends State<Spy> {
                       ],
                     ),
                     const SizedBox(height: 20),
+
                     // Number of Players
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -123,6 +179,7 @@ class _SpyState extends State<Spy> {
                       ],
                     ),
                     const SizedBox(height: 20),
+
                     // Number of Spies
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -150,6 +207,7 @@ class _SpyState extends State<Spy> {
                       ],
                     ),
                     const SizedBox(height: 20),
+
                     // Category Selection
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -176,6 +234,7 @@ class _SpyState extends State<Spy> {
                       ],
                     ),
                     const SizedBox(height: 30),
+
                     // Start Button
                     ElevatedButton(
                       onPressed: _startGame,

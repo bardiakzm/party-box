@@ -1,4 +1,4 @@
-List<Map<String, String>> persianCountries = [
+List<Map<String, String>> countriesList = [
   {'english': 'Afghanistan', 'persian': 'افغانستان'},
   {'english': 'Albania', 'persian': 'آلبانی'},
   {'english': 'Algeria', 'persian': 'الجزایر'},

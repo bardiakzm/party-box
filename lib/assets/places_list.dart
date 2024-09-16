@@ -1,4 +1,4 @@
-List<Map<String, String>> persianPlaces = [
+List<Map<String, String>> placesList = [
   // Urban & Public Places
   {'english': 'Cafe', 'persian': 'کافه'},
   {'english': 'Restaurant', 'persian': 'رستوران'},

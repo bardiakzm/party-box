@@ -25,7 +25,7 @@ class ChooseLanguageScreen extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               ElevatedButton(
-                onPressed: () => _onLanguageSelected(context, 'English'),
+                onPressed: () => _onLanguageSelected(context, 'english'),
                 style: ElevatedButton.styleFrom(
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
@@ -36,7 +36,7 @@ class ChooseLanguageScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () => _onLanguageSelected(context, 'Persian'),
+                onPressed: () => _onLanguageSelected(context, 'persian'),
                 style: ElevatedButton.styleFrom(
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
