@@ -22,6 +22,9 @@ class PartyBoxApp extends StatelessWidget {
       routes: {
         '/main': (context) => const MainScreen(), // Root route
         '/spy': (context) => Spy(), // Route for Spy Game
+        '/spyl': (context) => Spy(
+              languageChosen: true,
+            ), // Route for Spy Game but use globally saved lang
       },
     );
   }

@@ -29,7 +29,8 @@ class ChooseLanguageScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
-                  textStyle: const TextStyle(fontSize: 18),
+                  textStyle: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.w700),
                   backgroundColor: Colors.blue,
                 ),
                 child: const Text('English'),
@@ -40,7 +41,8 @@ class ChooseLanguageScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
-                  textStyle: const TextStyle(fontSize: 18),
+                  textStyle: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.w700),
                   backgroundColor: Colors.green,
                 ),
                 child: const Text('Persian'),
