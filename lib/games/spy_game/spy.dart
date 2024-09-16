@@ -24,6 +24,7 @@ class _SpyState extends State<Spy> {
   int _numSpies = 1; // Default number of spies
   String _selectedCategory = 'Animals'; // Default category
   String? _chosenWord; // Variable to hold the chosen word
+  late List<int> _spyIndexes = [];
 
   final List<String> _categories = [
     'Cities',
@@ -66,9 +67,9 @@ class _SpyState extends State<Spy> {
 
   // Method to start the game
   void _startGame() {
+    Random random = Random();
     List<Map<String, String>> categoryList = _getListByCategory();
     if (categoryList.isNotEmpty) {
-      Random random = Random();
       int randomIndex = random.nextInt(categoryList.length);
 
       // Check if the selected language exists in the map
@@ -78,6 +79,13 @@ class _SpyState extends State<Spy> {
       } else {
         print('Language not found in the list.');
         _chosenWord = null; // Handle case where language key doesn't exist
+      }
+    }
+    _spyIndexes.clear();
+    while (_spyIndexes.length < _numSpies) {
+      int randomSpyIndex = random.nextInt(_numPlayers);
+      if (!_spyIndexes.contains(randomSpyIndex)) {
+        _spyIndexes.add(randomSpyIndex);
       }
     }
     print('Starting game with:');
@@ -92,9 +100,9 @@ class _SpyState extends State<Spy> {
       MaterialPageRoute(
           builder: (context) => StartPage(
               numPlayers: _numPlayers,
-              numSpies: _numSpies,
+              selectedWord: _chosenWord,
               gameDuration: _gameDuration,
-              selectedWord: _chosenWord)),
+              spyIndexes: _spyIndexes)),
     );
   }
 
