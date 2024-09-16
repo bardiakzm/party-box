@@ -9,52 +9,59 @@ class ChooseLanguageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, '/main', ModalRoute.withName('/'));
-            },
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/main', ModalRoute.withName('/'));
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/main', ModalRoute.withName('/'));
+              },
+            ),
+            title: const Text('Choose Language'),
+            backgroundColor: Colors.black,
           ),
-          title: const Text('Choose Language'),
-          backgroundColor: Colors.black,
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Select your language',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: () => _onLanguageSelected(context, 'english'),
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
-                  textStyle: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w700),
-                  backgroundColor: Colors.blue,
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Select your language',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                child: const Text('English'),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () => _onLanguageSelected(context, 'persian'),
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
-                  textStyle: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w700),
-                  backgroundColor: Colors.green,
+                const SizedBox(height: 40),
+                ElevatedButton(
+                  onPressed: () => _onLanguageSelected(context, 'english'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 50),
+                    textStyle: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w700),
+                    backgroundColor: Colors.blue,
+                  ),
+                  child: const Text('English'),
                 ),
-                child: const Text('Persian'),
-              ),
-            ],
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () => _onLanguageSelected(context, 'persian'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 50),
+                    textStyle: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w700),
+                    backgroundColor: Colors.green,
+                  ),
+                  child: const Text('Persian'),
+                ),
+              ],
+            ),
           ),
         ),
       ),

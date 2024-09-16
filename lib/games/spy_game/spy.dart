@@ -32,7 +32,7 @@ class _SpyState extends State<Spy> {
   late final List<int> _spyIndexes = [];
 
   final List<String> _categories = [
-    'Cities',
+    'Places',
     'Animals',
     'Countries'
   ]; // Categories for the game
