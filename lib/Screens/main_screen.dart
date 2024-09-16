@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:party_box/games/spy_game/spy.dart';
 import 'package:party_box/games/wink_game/wink.dart';
@@ -20,6 +22,17 @@ class MainScreen extends StatelessWidget {
             languageChosen:
                 false); // Default to Spy game if index is out of bounds
     }
+  }
+
+  void surprisePick(context) {
+    Random random = Random();
+    int randomPickedGameNumber = random.nextInt(gamesList.length);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => _getGameScreen(randomPickedGameNumber),
+      ),
+    );
   }
 
   @override
@@ -86,7 +99,7 @@ class MainScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Implement surprise me functionality
+                surprisePick(context);
               },
               style: ElevatedButton.styleFrom(
                 padding:

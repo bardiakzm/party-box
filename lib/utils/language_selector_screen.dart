@@ -12,6 +12,13 @@ class ChooseLanguageScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/main', ModalRoute.withName('/'));
+            },
+          ),
           title: const Text('Choose Language'),
           backgroundColor: Colors.black,
         ),
