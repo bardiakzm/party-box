@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'player_page.dart';
+
 class StartPage extends StatefulWidget {
   final int numPlayers;
   final int gameDuration;
@@ -84,46 +86,5 @@ class _StartPageState extends State<StartPage> {
         totalPlayers: widget.numPlayers,
       );
     }
-  }
-}
-
-// Update your PlayerPage to include onNext callback and player information
-class PlayerPage extends StatelessWidget {
-  final String text;
-  final VoidCallback onNext;
-  final int playerNumber;
-  final int totalPlayers;
-
-  const PlayerPage({
-    Key? key,
-    required this.text,
-    required this.onNext,
-    required this.playerNumber,
-    required this.totalPlayers,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Player $playerNumber of $totalPlayers'),
-            const SizedBox(height: 20),
-            Text(
-              text,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 50),
-            ElevatedButton(
-              onPressed: onNext,
-              child:
-                  Text(playerNumber < totalPlayers ? 'Next Player' : 'Finish'),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
