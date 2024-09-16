@@ -19,7 +19,7 @@ class Spy extends StatefulWidget {
 class _SpyState extends State<Spy> {
   String? _selectedLanguage;
   bool _languageChosen = false;
-  int _gameDuration = 10; // Default game duration
+  int _gameDuration = 3; // Default game duration
   int _numPlayers = 4; // Default number of players
   int _numSpies = 1; // Default number of spies
   String _selectedCategory = 'Animals'; // Default category
@@ -143,7 +143,7 @@ class _SpyState extends State<Spy> {
                         DropdownButton<int>(
                           value: _gameDuration,
                           dropdownColor: Colors.black,
-                          items: [5, 10, 15, 20, 30]
+                          items: [1, 3, 5, 10, 15, 20, 30]
                               .map((value) => DropdownMenuItem<int>(
                                     value: value,
                                     child: Text(value.toString(),

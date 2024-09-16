@@ -102,7 +102,7 @@ class _CircularTimerState extends State<CircularTimer>
                 },
                 onComplete: () {
                   debugPrint('Countdown Ended');
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
                 },
                 onChange: (String timeStamp) {
                   debugPrint('Countdown Changed $timeStamp');
