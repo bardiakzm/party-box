@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:party_box/assets/timer_page.dart';
 
 import 'player_page.dart';
 
@@ -38,7 +39,13 @@ class _StartPageState extends State<StartPage> {
       });
     } else {
       // All players have seen their roles, end the game or move to the next phase
-      Navigator.of(context).pop(); // Or navigate to a game screen
+      // Navigator.of(context).pop(); // Or navigate to a game screen
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                CircularTimer(duration: widget.gameDuration * 60)),
+      );
     }
   }
 
