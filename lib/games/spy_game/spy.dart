@@ -2,29 +2,34 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:party_box/games/spy_game/start_page.dart';
+import 'package:party_box/utils/global_variables.dart'; // Ensure this import is correct
 import 'package:party_box/utils/language_selector_screen.dart';
 
+import '../../Screens/main_screen.dart';
 import '../../assets/animals_list.dart';
 import '../../assets/countries_list.dart';
 import '../../assets/places_list.dart'; // Import the Choose Language Screen
 
 class Spy extends StatefulWidget {
+  bool? languageChosen;
+  Spy({super.key, this.languageChosen});
+
   final String label = 'Spy';
-  const Spy({super.key});
 
   @override
   State<Spy> createState() => _SpyState();
 }
 
 class _SpyState extends State<Spy> {
-  String? _selectedLanguage;
+  String? _selectedLanguage = 'english'; // Default language
   bool _languageChosen = false;
   int _gameDuration = 3; // Default game duration
   int _numPlayers = 4; // Default number of players
   int _numSpies = 1; // Default number of spies
   String _selectedCategory = 'Animals'; // Default category
   String? _chosenWord; // Variable to hold the chosen word
-  late List<int> _spyIndexes = [];
+  bool _isLoading = true;
+  late final List<int> _spyIndexes = [];
 
   final List<String> _categories = [
     'Cities',
@@ -35,10 +40,14 @@ class _SpyState extends State<Spy> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _languageChosen = widget.languageChosen ?? false;
     if (!_languageChosen) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _chooseLanguage();
       });
+    } else {
+      _selectedLanguage = lastSelectedLang;
+      _isLoading = false;
     }
   }
 
@@ -51,7 +60,9 @@ class _SpyState extends State<Spy> {
     setState(() {
       _selectedLanguage = selectedLanguage ??
           'english'; // Default to English if no language chosen
+      lastSelectedLang = _selectedLanguage; // Update global variable
       _languageChosen = true;
+      _isLoading = false;
     });
   }
 
@@ -112,9 +123,21 @@ class _SpyState extends State<Spy> {
       appBar: AppBar(
         title: const Text('Spy Game'),
         backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MainScreen(),
+                ));
+          },
+        ),
       ),
-      body: _selectedLanguage == null
-          ? const Center(child: CircularProgressIndicator())
+      body: _isLoading
+          ? const Center(
+              child:
+                  CircularProgressIndicator()) // Show loading indicator while loading
           : Padding(
               padding: const EdgeInsets.all(16.0),
               child: Center(

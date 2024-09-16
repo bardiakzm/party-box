@@ -12,11 +12,13 @@ class MainScreen extends StatelessWidget {
   Widget _getGameScreen(int index) {
     switch (index) {
       case 0:
-        return Spy(); // Navigates to Spy game
+        return Spy(languageChosen: false); // Navigates to Spy game
       case 1:
         return Wink(); // Navigates to Wink game
       default:
-        return Spy(); // Default to Spy game if index is out of bounds
+        return Spy(
+            languageChosen:
+                false); // Default to Spy game if index is out of bounds
     }
   }
 
@@ -24,6 +26,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Party Box'),
         backgroundColor: Colors.black,
         actions: [
