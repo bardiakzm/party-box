@@ -16,7 +16,7 @@ class MainScreen extends StatelessWidget {
       case 0:
         return Spy(languageChosen: false); // Navigates to Spy game
       case 1:
-        return Wink(); // Navigates to Wink game
+        return const Wink(); // Navigates to Wink game
       default:
         return Spy(
             languageChosen:

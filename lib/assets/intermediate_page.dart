@@ -9,12 +9,12 @@ class IntermediatePage extends StatelessWidget {
   final String returnRouteName;
 
   const IntermediatePage({
-    Key? key,
+    super.key,
     required this.onNext,
     required this.playerNumber,
     required this.totalPlayers,
     required this.returnRouteName,
-  }) : super(key: key);
+  });
 
   void _showExitDialog(BuildContext context) {
     showDialog(

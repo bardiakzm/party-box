@@ -54,7 +54,7 @@ class _StartPageState extends State<StartPage> {
           MaterialPageRoute(
               builder: (context) => CircularTimer(
                     duration: widget.gameDuration * 60,
-                    returnRoute: Wink(),
+                    returnRoute: const Wink(),
                   )),
         );
       }

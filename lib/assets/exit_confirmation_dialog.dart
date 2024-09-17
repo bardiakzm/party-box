@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class ExitConfirmationDialog extends StatelessWidget {
   final String routeName; // This will accept the named route
 
-  const ExitConfirmationDialog({Key? key, required this.routeName})
-      : super(key: key);
+  const ExitConfirmationDialog({super.key, required this.routeName});
 
   void _navigateToRoute(BuildContext context) {
     Navigator.of(context).pop(); // Close the dialog

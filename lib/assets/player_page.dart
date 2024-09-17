@@ -10,13 +10,13 @@ class PlayerPage extends StatelessWidget {
   final String returnRouteName;
 
   const PlayerPage({
-    Key? key,
+    super.key,
     required this.text,
     required this.onNext,
     required this.playerNumber,
     required this.totalPlayers,
     required this.returnRouteName,
-  }) : super(key: key);
+  });
 
   void _showExitDialog(BuildContext context) {
     showDialog(

@@ -26,7 +26,7 @@ class PartyBoxApp extends StatelessWidget {
         '/spyl': (context) => Spy(
               languageChosen: true,
             ), // Route for Spy Game but use globally saved lang
-        '/wink': (context) => Wink(), // Route for Spy Game
+        '/wink': (context) => const Wink(), // Route for Spy Game
       },
     );
   }

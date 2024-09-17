@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'start_page.dart';
 
 class Wink extends StatefulWidget {
-  const Wink({Key? key}) : super(key: key);
+  const Wink({super.key});
   final String label = 'Wink';
   @override
   _WinkState createState() => _WinkState();

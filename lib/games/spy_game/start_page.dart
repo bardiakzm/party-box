@@ -12,12 +12,12 @@ class StartPage extends StatefulWidget {
   final List<int> spyIndexes;
 
   const StartPage({
-    Key? key,
+    super.key,
     required this.numPlayers,
     required this.gameDuration,
     required this.selectedWord,
     required this.spyIndexes,
-  }) : super(key: key);
+  });
 
   @override
   _StartPageState createState() => _StartPageState();
