@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'Screens/main_screen.dart';
 import 'games/spy_game/spy.dart';
+import 'games/wink_game/wink.dart';
 
 void main() {
   runApp(const PartyBoxApp());
@@ -25,6 +26,7 @@ class PartyBoxApp extends StatelessWidget {
         '/spyl': (context) => Spy(
               languageChosen: true,
             ), // Route for Spy Game but use globally saved lang
+        '/wink': (context) => Wink(), // Route for Spy Game
       },
     );
   }

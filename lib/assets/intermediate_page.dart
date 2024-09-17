@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 
-import '../../assets/exit_confirmation_dialog.dart';
+import 'exit_confirmation_dialog.dart';
 
 class IntermediatePage extends StatelessWidget {
   final VoidCallback onNext;
   final int playerNumber;
   final int totalPlayers;
+  final String returnRouteName;
 
   const IntermediatePage({
     Key? key,
     required this.onNext,
     required this.playerNumber,
     required this.totalPlayers,
+    required this.returnRouteName,
   }) : super(key: key);
 
   void _showExitDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const ExitConfirmationDialog(
-            routeName: '/spyl'); // Use the dialog with your route
+        return ExitConfirmationDialog(
+            routeName: returnRouteName); // Use the dialog with your route
       },
     );
   }

@@ -1,11 +1,11 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 
-import '../games/spy_game/spy.dart';
-
 class CircularTimer extends StatefulWidget {
   final int duration;
-  const CircularTimer({super.key, required this.duration});
+  final Widget returnRoute;
+  const CircularTimer(
+      {super.key, required this.duration, required this.returnRoute});
 
   @override
   State<CircularTimer> createState() => _CircularTimerState();
@@ -62,7 +62,7 @@ class _CircularTimerState extends State<CircularTimer>
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Spy(languageChosen: true),
+                    builder: (context) => widget.returnRoute,
                   ),
                   (Route<dynamic> route) => false,
                 );

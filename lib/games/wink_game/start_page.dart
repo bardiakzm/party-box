@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:party_box/assets/intermediate_page.dart';
 import 'package:party_box/assets/timer_page.dart';
-import 'package:party_box/games/spy_game/spy.dart';
+import 'package:party_box/games/wink_game/wink.dart';
 
-import '../../assets/intermediate_page.dart';
 import '../../assets/player_page.dart';
 
 class StartPage extends StatefulWidget {
   final int numPlayers;
   final int gameDuration;
-  final String? selectedWord;
-  final List<int> spyIndexes;
+  final List<int> killerIndexes;
 
   const StartPage({
-    Key? key,
+    super.key,
     required this.numPlayers,
     required this.gameDuration,
-    required this.selectedWord,
-    required this.spyIndexes,
-  }) : super(key: key);
+    required this.killerIndexes,
+  });
 
   @override
   _StartPageState createState() => _StartPageState();
@@ -55,17 +53,18 @@ class _StartPageState extends State<StartPage> {
           context,
           MaterialPageRoute(
               builder: (context) => CircularTimer(
-                  duration: widget.gameDuration * 60,
-                  returnRoute: Spy(languageChosen: true))),
+                    duration: widget.gameDuration * 60,
+                    returnRoute: Wink(),
+                  )),
         );
       }
     }
   }
 
   String _getCurrentPlayerRole() {
-    return widget.spyIndexes.contains(_currentPlayer)
-        ? 'Spy'
-        : widget.selectedWord ?? 'Regular Player';
+    return widget.killerIndexes.contains(_currentPlayer)
+        ? 'Killer'
+        : 'Regular Player';
   }
 
   @override
@@ -101,7 +100,7 @@ class _StartPageState extends State<StartPage> {
     } else if (_showIntermediatePage) {
       // Show the intermediate page before showing the player's role
       return IntermediatePage(
-        returnRouteName: '/spyl',
+        returnRouteName: '/wink',
         onNext: _nextPlayer,
         playerNumber: _currentPlayer + 1,
         totalPlayers: widget.numPlayers,
@@ -109,7 +108,7 @@ class _StartPageState extends State<StartPage> {
     } else {
       // Show the player's role page
       return PlayerPage(
-        returnRouteName: '/spyl',
+        returnRouteName: '/wink',
         text: _getCurrentPlayerRole(),
         onNext: _nextPlayer,
         playerNumber: _currentPlayer + 1,
