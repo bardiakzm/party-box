@@ -47,106 +47,113 @@ class _WinkState extends State<Wink> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Wink Game'),
-        backgroundColor: Colors.deepPurpleAccent,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Configure Your Wink Game',
-                style: TextStyle(fontSize: 24),
-              ),
-              const SizedBox(height: 20),
-
-              // Number of Players
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Number of Players:'),
-                  DropdownButton<int>(
-                    value: _numPlayers,
-                    items: List.generate(29, (index) => index + 2)
-                        .map((value) => DropdownMenuItem<int>(
-                              value: value,
-                              child: Text(value.toString()),
-                            ))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _numPlayers = value ?? 5;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-
-              // Number of Killers
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Number of Killers:'),
-                  DropdownButton<int>(
-                    value: _numKillers,
-                    items: List.generate(_numPlayers - 1, (index) => index + 1)
-                        .map((value) => DropdownMenuItem<int>(
-                              value: value,
-                              child: Text(value.toString()),
-                            ))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _numKillers = value ?? 1;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-
-              // Game Duration
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Game Duration (minutes):'),
-                  DropdownButton<int>(
-                    value: _gameDuration,
-                    items: [1, 3, 5, 10, 15, 20, 30]
-                        .map((value) => DropdownMenuItem<int>(
-                              value: value,
-                              child: Text(value.toString()),
-                            ))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _gameDuration = value ?? 5;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-
-              // Start Button
-              ElevatedButton(
-                onPressed: _startGame,
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
-                  backgroundColor: Colors.pinkAccent,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        Navigator.popAndPushNamed(context, '/main');
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Wink Game'),
+          backgroundColor: Colors.deepPurpleAccent,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Configure Your Wink Game',
+                  style: TextStyle(fontSize: 24),
                 ),
-                child: const Text(
-                  'Start Game',
-                  style: TextStyle(fontSize: 18),
+                const SizedBox(height: 20),
+
+                // Number of Players
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Number of Players:'),
+                    DropdownButton<int>(
+                      value: _numPlayers,
+                      items: List.generate(29, (index) => index + 2)
+                          .map((value) => DropdownMenuItem<int>(
+                                value: value,
+                                child: Text(value.toString()),
+                              ))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _numPlayers = value ?? 5;
+                        });
+                      },
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+
+                // Number of Killers
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Number of Killers:'),
+                    DropdownButton<int>(
+                      value: _numKillers,
+                      items:
+                          List.generate(_numPlayers - 1, (index) => index + 1)
+                              .map((value) => DropdownMenuItem<int>(
+                                    value: value,
+                                    child: Text(value.toString()),
+                                  ))
+                              .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _numKillers = value ?? 1;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+
+                // Game Duration
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Game Duration (minutes):'),
+                    DropdownButton<int>(
+                      value: _gameDuration,
+                      items: [1, 3, 5, 10, 15, 20, 30]
+                          .map((value) => DropdownMenuItem<int>(
+                                value: value,
+                                child: Text(value.toString()),
+                              ))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _gameDuration = value ?? 5;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+
+                // Start Button
+                ElevatedButton(
+                  onPressed: _startGame,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 50),
+                    backgroundColor: Colors.pinkAccent,
+                  ),
+                  child: const Text(
+                    'Start Game',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

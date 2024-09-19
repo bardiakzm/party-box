@@ -4,7 +4,8 @@ class ChooseLanguageScreen extends StatelessWidget {
   const ChooseLanguageScreen({super.key});
 
   void _onLanguageSelected(BuildContext context, String language) {
-    Navigator.pop(context, language); // Return the selected language
+    // Navigator.pop(context, language); // Return the selected language
+    Navigator.pushReplacementNamed(context, '/spyl', result: language);
   }
 
   @override
