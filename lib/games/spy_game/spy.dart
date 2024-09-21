@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:party_box/games/game.dart';
 import 'package:party_box/games/spy_game/start_page.dart';
 import 'package:party_box/utils/global_variables.dart'; // Ensure this import is correct
 import 'package:party_box/utils/language_selector_screen.dart';
@@ -10,11 +11,17 @@ import '../../assets/lists/animals_list.dart';
 import '../../assets/lists/countries_list.dart';
 import '../../assets/lists/places_list.dart'; // Import the Choose Language Screen
 
-class Spy extends StatefulWidget {
+class Spy extends Game {
   bool? languageChosen;
-  Spy({super.key, this.languageChosen});
+  Spy({super.key, this.languageChosen}) {
+    super.label = 'Spy';
+    super.navigationLabel = 'spy';
+  }
 
-  final String label = 'Spy';
+  // @override
+  // final String label = 'Spy';
+  // @override
+  // final String navigationLabel = 'spy';
 
   @override
   State<Spy> createState() => _SpyState();
@@ -54,7 +61,10 @@ class _SpyState extends State<Spy> {
   Future<void> _chooseLanguage() async {
     final selectedLanguage = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const ChooseLanguageScreen()),
+      MaterialPageRoute(
+          builder: (context) => ChooseLanguageScreen(
+                parentWidget: widget,
+              )),
     );
 
     setState(() {

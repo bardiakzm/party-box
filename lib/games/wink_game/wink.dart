@@ -7,6 +7,7 @@ import 'start_page.dart';
 class Wink extends StatefulWidget {
   const Wink({super.key});
   final String label = 'Wink';
+  final String navigationLabel = 'wink';
   @override
   _WinkState createState() => _WinkState();
 }

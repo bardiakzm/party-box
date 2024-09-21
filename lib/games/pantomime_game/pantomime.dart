@@ -2,42 +2,45 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:party_box/games/game.dart';
-import 'package:party_box/games/spy_game/start_page.dart';
-import 'package:party_box/utils/global_variables.dart'; // Ensure this import is correct
+import 'package:party_box/utils/global_variables.dart';
 import 'package:party_box/utils/language_selector_screen.dart';
 
 import '../../Screens/main_screen.dart';
 import '../../assets/lists/animals_list.dart';
 import '../../assets/lists/countries_list.dart';
-import '../../assets/lists/places_list.dart'; // Import the Choose Language Screen
+import '../../assets/lists/foods_list.dart';
+import '../../assets/lists/movies_list.dart';
+import '../../assets/lists/objects_list.dart';
+import '../../assets/lists/places_list.dart';
 
-class Charades extends Game {
+class Pantomime extends Game {
   bool? languageChosen;
-  Charades({super.key, this.languageChosen}) {
-    super.label = 'Charades';
-    super.navigationLabel = 'char';
+  Pantomime({super.key, this.languageChosen}) {
+    super.label = 'Pantomime';
+    super.navigationLabel = 'pant';
   }
 
   @override
-  State<Charades> createState() => _CharadesState();
+  State<Pantomime> createState() => _PantomimeState();
 }
 
-class _CharadesState extends State<Charades> {
+class _PantomimeState extends State<Pantomime> {
   String? _selectedLanguage = 'english'; // Default language
   bool _languageChosen = false;
   int _gameDuration = 3; // Default game duration
   int _numPlayers = 4; // Default number of players
-  int _numSpies = 1; // Default number of spies
   String _selectedCategory = 'Animals'; // Default category
   String? _chosenWord; // Variable to hold the chosen word
   bool _isLoading = true;
-  late final List<int> _spyIndexes = [];
 
   final List<String> _categories = [
-    'Places',
     'Animals',
-    'Countries'
-  ]; // Categories for the game
+    'Foods',
+    'Countries',
+    'Places',
+    'Objects',
+    'Movies'
+  ]; // Categories for the Pantomime game
 
   @override
   void didChangeDependencies() {
@@ -45,7 +48,7 @@ class _CharadesState extends State<Charades> {
     _languageChosen = widget.languageChosen ?? false;
     if (!_languageChosen) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _chooseLanguage();
+        _chooseLanguage(widget);
       });
     } else {
       _selectedLanguage = lastSelectedLang;
@@ -53,12 +56,12 @@ class _CharadesState extends State<Charades> {
     }
   }
 
-  Future<void> _chooseLanguage() async {
+  Future<void> _chooseLanguage(Game targetPage) async {
     final selectedLanguage = await Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => ChooseLanguageScreen(
-                parentWidget: widget,
+                parentWidget: targetPage,
               )),
     );
 
@@ -72,12 +75,21 @@ class _CharadesState extends State<Charades> {
   }
 
   List<Map<String, String>> _getListByCategory() {
-    if (_selectedCategory == 'Animals') {
-      return animalsList; // From animals_list.dart
-    } else if (_selectedCategory == 'Places') {
-      return placesList; // From places_list.dart
-    } else {
-      return countriesList; // From countries_list.dart
+    switch (_selectedCategory) {
+      case 'Animals':
+        return animalsList;
+      case 'Foods':
+        return foodsList;
+      case 'Countries':
+        return countriesList;
+      case 'Places':
+        return placesList;
+      case 'Objects':
+        return objectsList;
+      case 'Movies':
+        return moviesAndSeriesList;
+      default:
+        return [];
     }
   }
 
@@ -97,29 +109,13 @@ class _CharadesState extends State<Charades> {
         _chosenWord = null; // Handle case where language key doesn't exist
       }
     }
-    _spyIndexes.clear();
-    while (_spyIndexes.length < _numSpies) {
-      int randomSpyIndex = random.nextInt(_numPlayers);
-      if (!_spyIndexes.contains(randomSpyIndex)) {
-        _spyIndexes.add(randomSpyIndex);
-      }
-    }
+
     print('Starting game with:');
     print('Language: $_selectedLanguage');
     print('Time: $_gameDuration minutes');
     print('Players: $_numPlayers');
-    print('Spies: $_numSpies');
     print('Category: $_selectedCategory');
     // Add game logic or navigation to the game screen here
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => StartPage(
-              numPlayers: _numPlayers,
-              selectedWord: _chosenWord,
-              gameDuration: _gameDuration,
-              spyIndexes: _spyIndexes)),
-    );
   }
 
   @override
@@ -131,7 +127,7 @@ class _CharadesState extends State<Charades> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Spy Game'),
+          title: const Text('Pantomime Game'),
           backgroundColor: Colors.black,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -155,7 +151,7 @@ class _CharadesState extends State<Charades> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Configure Your Spy Game',
+                        'Configure Your Pantomime Game',
                         style: TextStyle(fontSize: 24, color: Colors.white),
                       ),
                       const SizedBox(height: 20),
@@ -222,34 +218,6 @@ class _CharadesState extends State<Charades> {
                       ),
                       const SizedBox(height: 20),
 
-                      // Number of Spies
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text('Number of Spies:',
-                              style: TextStyle(color: Colors.white)),
-                          DropdownButton<int>(
-                            value: _numSpies,
-                            dropdownColor: Colors.black,
-                            items: List.generate(
-                                    _numPlayers - 1, (index) => index + 1)
-                                .map((value) => DropdownMenuItem<int>(
-                                      value: value,
-                                      child: Text(value.toString(),
-                                          style: const TextStyle(
-                                              color: Colors.white)),
-                                    ))
-                                .toList(),
-                            onChanged: (value) {
-                              setState(() {
-                                _numSpies = value ?? 1;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-
                       // Category Selection
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -269,7 +237,7 @@ class _CharadesState extends State<Charades> {
                                 .toList(),
                             onChanged: (value) {
                               setState(() {
-                                _selectedCategory = value ?? 'All';
+                                _selectedCategory = value ?? 'Animals';
                               });
                             },
                           ),

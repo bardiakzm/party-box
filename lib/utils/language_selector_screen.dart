@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:party_box/games/game.dart';
 
 class ChooseLanguageScreen extends StatelessWidget {
-  const ChooseLanguageScreen({super.key});
+  final Game? parentWidget;
+  const ChooseLanguageScreen({super.key, required this.parentWidget});
 
-  void _onLanguageSelected(BuildContext context, String language) {
+  void _onLanguageSelected(
+      BuildContext context, String language, Game targetPage) {
     // Navigator.pop(context, language); // Return the selected language
-    Navigator.pushReplacementNamed(context, '/spyl', result: language);
+    Navigator.pushReplacementNamed(context, '/${targetPage.navigationLabel}l',
+        result: language);
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => targetPage));
+    Navigator.pop;
   }
 
   @override
@@ -39,7 +46,8 @@ class ChooseLanguageScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 40),
                 ElevatedButton(
-                  onPressed: () => _onLanguageSelected(context, 'english'),
+                  onPressed: () =>
+                      _onLanguageSelected(context, 'english', parentWidget!),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 50),
@@ -51,7 +59,8 @@ class ChooseLanguageScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () => _onLanguageSelected(context, 'persian'),
+                  onPressed: () =>
+                      _onLanguageSelected(context, 'persian', parentWidget!),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 50),

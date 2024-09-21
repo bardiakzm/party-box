@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:party_box/games/Charades_game/Charades.dart';
+import 'package:party_box/games/pantomime_game/pantomime.dart';
 import 'package:party_box/games/spy_game/spy.dart';
 import 'package:party_box/games/wink_game/wink.dart';
 import 'package:party_box/resources/lists.dart';
@@ -17,6 +19,12 @@ class MainScreen extends StatelessWidget {
         return Spy(languageChosen: false); // Navigates to Spy game
       case 1:
         return const Wink(); // Navigates to Wink game
+      case 2:
+        return Charades(languageChosen: false); // Navigates to Spy game
+      case 3:
+        return Pantomime(languageChosen: false); // Navigates to Spy game
+      case 4:
+        return Spy(languageChosen: false); // Navigates to Spy game
       default:
         return Spy(
             languageChosen:
