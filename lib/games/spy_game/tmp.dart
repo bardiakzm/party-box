@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:party_box/assets/animals_list.dart'; // import your assets
-import 'package:party_box/assets/countries_list.dart';
-import 'package:party_box/assets/places_list.dart';
+import 'package:party_box/assets/lists/animals_list.dart'; // import your assets
+import 'package:party_box/assets/lists/countries_list.dart';
+import 'package:party_box/assets/lists/places_list.dart';
 
 class Spy extends StatefulWidget {
   final String label = 'Spy';
@@ -22,7 +22,10 @@ class _SpyState extends State<Spy> {
   String? _chosenWord; // Variable to hold the chosen word
 
   final List<String> _categoryItems = ['Animals', 'Places', 'Countries'];
-  final List<String> _languageItems = ['fa', 'en']; // Persian and English for now
+  final List<String> _languageItems = [
+    'fa',
+    'en'
+  ]; // Persian and English for now
 
   // Function to retrieve the list based on the category selected
   List<Map<String, String>> _getListByCategory() {
@@ -217,7 +220,8 @@ class _SpyState extends State<Spy> {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   'Chosen Word: $_chosenWord',
-                  style: const TextStyle(fontSize: 22, color: Colors.blueAccent),
+                  style:
+                      const TextStyle(fontSize: 22, color: Colors.blueAccent),
                 ),
               ),
             if (_chosenWord == null)

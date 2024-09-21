@@ -6,9 +6,9 @@ import 'package:party_box/utils/global_variables.dart'; // Ensure this import is
 import 'package:party_box/utils/language_selector_screen.dart';
 
 import '../../Screens/main_screen.dart';
-import '../../assets/animals_list.dart';
-import '../../assets/countries_list.dart';
-import '../../assets/places_list.dart'; // Import the Choose Language Screen
+import '../../assets/lists/animals_list.dart';
+import '../../assets/lists/countries_list.dart';
+import '../../assets/lists/places_list.dart'; // Import the Choose Language Screen
 
 class Spy extends StatefulWidget {
   bool? languageChosen;
